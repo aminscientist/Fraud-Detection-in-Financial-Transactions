@@ -1,6 +1,7 @@
 import random
 from datetime import datetime, timedelta
-
+import json
+import os
 
 def random_date(start, end):
     return start + timedelta(
@@ -65,5 +66,20 @@ def generate_data(num_transactions, num_customers):
 
     return transactions, customers, external_data
 
+def sauvegarder_json(data, file_name, directory='data'):
+    file_path = os.path.join(directory, file_name)
+    os.makedirs(directory, exist_ok=True)  # Create directory if it's not exist
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+    print(f'Data stored in {file_path}')
+
+
 transactions, customers, external_data = generate_data(1000, 100)
-print(transactions)
+
+# Enregistrer chaque liste dans un fichier JSON
+sauvegarder_json(transactions, 'transactions.json', 'data')
+sauvegarder_json(customers, 'customers.json', 'data')
+sauvegarder_json(external_data, 'external_data.json', 'data')
+
+
+#print(transactions)
