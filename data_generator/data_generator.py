@@ -15,7 +15,7 @@ def generate_high_frequency_transactions(customer_id, start_date, num_transactio
             "date_time": random_date(start_date, start_date + timedelta(days=1)).isoformat(),
             "amount": random.uniform(10, 1000),
             "currency": random.choice(["USD", "EUR", "GBP"]),
-            "merchant_details": f"Merchant{random.randint(1, 20)}",
+            "merchant_details": f"Merchant{random.randint(1, 80)}",
             "customer_id": customer_id,
             "transaction_type": random.choice(["purchase", "withdrawal"]),
             "location": f"City{random.randint(11, 20)}"  # Different from customer's city
@@ -26,7 +26,7 @@ def generate_data(num_transactions, num_customers):
     customers = []
     transactions = []
     external_data = {
-        "blacklist_info": [f"Merchant{random.randint(21, 30)}" for _ in range(10)],
+        "blacklist_info": list(set([f"Merchant{random.randint(21, 30)}" for _ in range(10)])),
         "credit_scores": {},
         "fraud_reports": {}
     }
